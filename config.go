@@ -19,7 +19,7 @@ const (
 type Config struct {
 	queueSize             int    // size of the internal log message queue
 	inputBufferSize       int    // input up to \n or this number of bytes is considered a line
-	outputType            string // one of syslog, file
+	outputType            string // one of syslog, file, parallel (both file and syslog)
 	syslogBufferSize      int    // lines bound for syslog lines are split at this size
 	fileBufferSize        int    // lines bound for a file are split at this size
 	fileWriterDir         string // base dir for the file writer output's file
