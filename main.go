@@ -37,6 +37,8 @@ func main() {
 			config.outputType = Syslog
 		case "file":
 			config.outputType = File
+		case "parallel":
+			config.outputType = Parallel
 		}
 	}
 
@@ -81,6 +83,10 @@ func createWriter(config *Config, tag string) (Writer, error) {
 		return &SyslogWriter{config: config, tag: tag}, nil
 	case File:
 		return &FileWriter{config: config, tag: tag}, nil
+	case Parallel:
+		return &ParallelWriter {
+			writers: []Writer{ &SyslogWriter{config: config, tag: tag}, &FileWriter{config: config, tag: tag} },
+		}, nil
 	default:
 		return nil, errors.New("unsupported output type")
 	}

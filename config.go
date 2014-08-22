@@ -11,6 +11,7 @@ const (
 	// output types
 	Syslog = "syslog"
 	File   = "file"
+	Parallel = "parallel"
 
 	DefaultConfigFile = "/etc/openshift/logshifter.conf"
 )
@@ -70,6 +71,8 @@ func ParseConfig(file string) (*Config, error) {
 				config.outputType = Syslog
 			case "file":
 				config.outputType = File
+			case "parallel":
+				config.outputType = Parallel
 			}
 		case "syslogbuffersize":
 			config.syslogBufferSize, _ = strconv.Atoi(v)
